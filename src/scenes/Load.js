@@ -36,6 +36,7 @@ class Load extends Phaser.Scene {
             frameWidth: 496,
             frameHeight: 57
         })
+        this.map = this.make.tilemap('track1JSON')
 
         //this.load.audio('sfx-pop', 'sfx/pop.wav')
     }

@@ -1,0 +1,21 @@
+/* CSS to center the game window to tab */
+/* obtained from query */
+/* Center the canvas horizontally and vertically */
+body {
+    background-color: #252525; /* Adjust the shade of grey as needed */
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 10vh; /* Set the height of the container to 100% of the viewport height */
+}
+
+/* Adjust the size of the canvas */
+canvas {
+    /* Add any additional styles for the canvas element */
+    border: 1px solid black; /* Example border for visualization */
+    margin-left: 140px;
+}

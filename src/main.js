@@ -1,21 +1,25 @@
-// Code Practice: Slime World
-// Name: 
-// Date: 
+// Code Practice: Broken bonez (Adaptation)
+// Name: Handrei Bohrjah
+// Date: 3/5/2024
 
 let config = {
     type: Phaser.AUTO,
     render: {
         pixelArt: true
     },
-    width: 1024/2,
-    height: 576/2,
+    width: 1024,
+    height: 576,
     physics: {
-        default: "arcade",
-        arcade: {
-            debug: true
+        default: "matter",
+        matter: {
+            /*debug: {
+                staticLineColor: 0xff0000
+            },*/
+            gravity: {y : 1}
+            
         }
     },
-    zoom: 2,
+    zoom: 1,
     scene: [ Load, Overworld ]
 }
 
