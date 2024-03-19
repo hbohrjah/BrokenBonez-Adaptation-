@@ -19,11 +19,15 @@ class Load extends Phaser.Scene {
 
         this.load.path = './assets/';
         // load graphics assets
-        this.load.bitmapFont('regularShow', 'fonts/Unnamed.png','fonts/Unnamed.xml')
+        this.load.bitmapFont('pixelFont', 'fonts/pixel.png','fonts/pixel.xml')
+        this.load.bitmapFont('rrFont', 'fonts/rr-Font.png','fonts/rr-Font.xml')
         this.load.image('sky', 'img/bb-Bckg.png')
 
         this.load.image('tilesetImage', 'img/bbTrack-Sheet.png')
         this.load.image('overlayImage', 'img/overlay.png')
+
+        this.load.audio('sfx-song', 'sfx/bbsfx.wav')
+
         this.load.tilemapTiledJSON('track1JSON', 'img/bb-Track1.json')
         // load spritesheet
         this.load.spritesheet('sprite1', 'img/brokenBonez-hero-Sheet.png', 
@@ -37,8 +41,6 @@ class Load extends Phaser.Scene {
             frameHeight: 57
         })
         this.map = this.make.tilemap('track1JSON')
-
-        //this.load.audio('sfx-pop', 'sfx/pop.wav')
     }
 
     create() {
@@ -51,7 +53,7 @@ class Load extends Phaser.Scene {
         this.anims.create({
             key: 'drive',
             frames: this.anims.generateFrameNumbers('sprite1', { start: 1, end: 2}),
-            frameRate: 5,
+            frameRate: 8,
             repeat : 0
         })
         this.anims.create({

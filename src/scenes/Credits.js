@@ -38,8 +38,9 @@ class Credits extends Phaser.Scene {
         // set up cursor keys
         //cursors = this.input.keyboard.createCursorKeys();
         this.add.text(game.config.width/2, game.config.height/2, 'Credits', scoreConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 'All assets created by Handrei Bohrjah', scoreConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + 32, 'All code implemented by Handrei Bohrjah', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 32, 'Assets derived from Regular Show (S2E7)', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 96, 'All assets implemeneted by Handrei Bohrjah', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 64, 'All code implemented by Handrei Bohrjah', scoreConfig).setOrigin(0.5)
     }
 
     update() {
@@ -64,7 +65,7 @@ class Credits extends Phaser.Scene {
             // start next scene
             passed = 0
             
-            this.scene.start('playScene');
+            this.scene.start('menuScene');
 
         }
     }

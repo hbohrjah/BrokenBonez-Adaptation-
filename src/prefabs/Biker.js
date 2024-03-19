@@ -25,28 +25,17 @@ class Biker extends Phaser.Physics.Matter.Sprite
         this.iTimer = 0
         
         scene.input.on('pointerdown', (pointer)=> {
-            if (pointer.leftButtonDown() && !this.parentScene.isColliding ) {
+            if (pointer.leftButtonDown() && keyRIGHT.isDown || keyRIGHT2.isDown) {
                 this.setFrame(3)
-            }
-            else if(pointer.leftButtonDown() && this.parentScene.isColliding)
-            {
-                 // Play the next frame of the current animation
-                this.currentAnimationIndex++;
-                if (this.currentAnimationIndex >= this.anims.get('stats').frames.length) {
-                    // Wrap around to the first frame if the end is reached
-                    this.currentAnimationIndex = 0;
-                }
-                //this.tempUI = this.add.image(this.cameras.main.width /2, this.cameras.main.height-246, 'statUI', this.currentAnimationIndex)
-                //this.statUI.destroy();
-                this.statUI.setFrame(this.currentAnimationIndex)
-                //this.tempUI.destroy();
-                this.statUI.setScale(0.96,0.91)
             }
         })
 
-        
+        /*scene.input.on('pointerup', (pointer)=> {
+            this.setFrame(1)
+        })*/
         scene.input.keyboard.on('keydown-D', () => {
             // Set the velocity of the player sprite when the "D" key is pressed
+            
             this.setVelocityX(5); // Set the X velocity to 100 (adjust as needed)
             this.isMoving = true; // Set the flag to true
         });
@@ -57,6 +46,7 @@ class Biker extends Phaser.Physics.Matter.Sprite
 
     update(time)
     {
+        //console.log(this.x, this.y)
         if(this.isMoving)
         {
             this.parentScene.sky.tilePositionX += 10
@@ -82,7 +72,6 @@ class Biker extends Phaser.Physics.Matter.Sprite
         else
         {
             //DAMP FACTOR is 0.9
-            
             this.setVelocityX(this.body.velocity.x * 0.9)
         }
         /*if(keyLEFT.isDown || keyLEFT2.isDown)
@@ -101,15 +90,11 @@ class Biker extends Phaser.Physics.Matter.Sprite
 
         if (this.parentScene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE).isDown && time > this.iTimer) 
         {
-         // Spacebar is pressed, perform actions
+            // Spacebar is pressed, perform actions
             console.log('Spacebar is pressed');
-            if(!this.parentScene.isColliding)
-            {
-                //this.parentScene.matter.world.setGravity(0)
-                this.setVelocityY(-27)
-            }
+            this.setVelocityY(-18)
             // Set a delay before allowing input again
-            this.iTimer = time + 2000; // 500 milliseconds delay
+            this.iTimer = time + 1000; // 500 milliseconds delay
         }
         
 
@@ -120,9 +105,22 @@ class Biker extends Phaser.Physics.Matter.Sprite
                     const normalizedCollision = pair.collision.normal
 
                     const angle = -89+Phaser.Math.RadToDeg(Math.atan2(normalizedCollision.y, normalizedCollision.x));
-        
-                    // Apply the angle to the player sprite's rotation
+                    //console.log(Phaser.Math.RadToDeg(Math.atan2(normalizedCollision.y, normalizedCollision.x)))
+                    //console.log(angle);
                     this.setRotation(angle);
+                    // Apply the angle to the player sprite's rotation
+                    
+                }
+                else if ((pair.bodyA === this.body && pair.bodyB === this.parentScene.hill2Vs) || (pair.bodyA === this.parentScene.hill2Vs && pair.bodyB === this.body)) {
+                    // Calculate the angle of the surface
+                    const normalizedCollision = pair.collision.normal
+
+                    const angle = -45+Phaser.Math.RadToDeg(Math.atan2(normalizedCollision.y, normalizedCollision.x));
+                    //console.log(Phaser.Math.RadToDeg(Math.atan2(normalizedCollision.y, normalizedCollision.x)))
+                    //console.log(angle);
+                    this.setRotation(-32);
+                    // Apply the angle to the player sprite's rotation
+                    
                 }
                 else
                 {
@@ -130,14 +128,12 @@ class Biker extends Phaser.Physics.Matter.Sprite
                 }
             })})
 
-        if(this.y> 500)
-        {
-            this.parentScene.scene.start('overworldScene')
-        }
+        
 
-        if(this.x> 1810)
+        if(this.x> 3950)
         {
-            this.parentScene.scene.start('overworldScene')
+            this.parentScene.bkSong.stop()
+            this.parentScene.scene.start('winScene')
         }
     }
 
